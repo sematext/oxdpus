@@ -12,9 +12,9 @@ To build oxdpus you have to satisify the following requirements:
 - Go 1.12>
 - gobindata (to embed XDP bytecode inside Go binary)
 
-This repository ships with `Makefile` to facilitate the build process. `make xdp` compiles the XDP program and generates the Go source to reference the resulting bytecode. Once XDP ELF object is produced, you can build the Go binary with `make go`. After build is done, the binary will be availalbe in `cmd/oxdpus/oxdpus`.
+This repository ships with `Makefile` to facilitate the build process. `make xdp` compiles the XDP program and generates the Go source to reference the resulting bytecode. Once XDP ELF object is produced, you can build the Go binary with `make go`. After compilation is done, the binary will be availalbe in `cmd/oxdpus/oxdpus`.
 
-If your mere intention is to just build the Go binary (without requiring modifications in XDP program), then you'll just need the Go compiler since XDP bytecode is already baked into the binary. 
+If your mere intention is to just build the Go binary (without requiring modifications in XDP program), then you'll only need the Go compiler since XDP bytecode is already baked into the binary. 
 
 ## Usage
 
