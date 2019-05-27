@@ -1,0 +1,3 @@
+.idea
+./cmd/oxdpus/oxdpus
+./pkg/xdp/prog/obj/xdp.o
