@@ -40,3 +40,32 @@ Flags:
 
 Use "oxdpus [command] --help" for more information about a command.
 ```
+
+To attach the XDP program on the network interface:
+
+```bash
+$ oxdpus attach --dev=vethbd33820
+INFO XDP program successfully attached to vethbd33820 device
+```
+
+The magic happens after you add a couple of IP addresses to the blacklist:
+
+```bash
+$ oxdpus add --ip=172.17.0.2
+INFO 172.17.0.2 address added to the blacklist
+$ oxdpus list
+* 172.17.0.2
+$ curl -v 172.17.0.2:80
+*   Trying 172.17.0.2...
+* TCP_NODELAY set
+curl: (7) Failed to connect to 172.17.0.2 port 80: No route to host
+```
+
+You can remove the IP from the blackist or even completely unload the program:
+
+```bash
+$ oxdpus remove --ip=172.17.0.2
+INFO 172.17.0.2 address removed from the blacklist
+$ oxdpus detach --dev=vethbd33820
+INFO XDP program successfully unloaded from vethbd33820 device
+```
