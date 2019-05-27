@@ -63,7 +63,7 @@ func (h *Hook) Attach(dev string) error {
 	}
 	// attempt attach the XDP program
 	if err := h.mod.AttachXDP(dev, progName); err != nil {
-		return fmt.Errorf("couldnt' attach XDP program to %s interface", dev)
+		return fmt.Errorf("couldn't attach XDP program to %s interface", dev)
 	}
 	return nil
 }
@@ -71,7 +71,7 @@ func (h *Hook) Attach(dev string) error {
 // Remove unloads the XDP program from the interface.
 func (h *Hook) Remove(dev string) error {
 	if err := h.mod.RemoveXDP(dev); err != nil {
-		return fmt.Errorf("couldnt' unload XDP program from %s interface", dev)
+		return fmt.Errorf("couldn't unload XDP program from %s interface", dev)
 	}
 	return nil
 }
