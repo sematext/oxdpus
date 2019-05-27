@@ -53,15 +53,15 @@ int xdp_ip_filter(struct xdp_md *ctx) {
     eth_type = eth->h_proto;
 
     /* handle VLAN tagged packet */
-	if (eth_type == htons(ETH_P_8021Q) || eth_type == htons(ETH_P_8021AD)) {
-		struct vlan_hdr *vlan_hdr;
+    if (eth_type == htons(ETH_P_8021Q) || eth_type == htons(ETH_P_8021AD)) {
+	struct vlan_hdr *vlan_hdr;
 
-		vlan_hdr = (void *)eth + offset;
-		offset += sizeof(*vlan_hdr);
-		if ((void *)eth + offset > end)
-			return false;
-		eth_type = vlan_hdr->h_vlan_encapsulated_proto;
-	}
+	vlan_hdr = (void *)eth + offset;
+	offset += sizeof(*vlan_hdr);
+	if ((void *)eth + offset > end)
+		return false;
+	eth_type = vlan_hdr->h_vlan_encapsulated_proto; 
+   }
 
     /* let's only handle IPv4 addresses */
     if (eth_type == ntohs(ETH_P_IPV6)) {
