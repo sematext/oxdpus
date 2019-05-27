@@ -61,7 +61,7 @@ $ curl -v 172.17.0.2:80
 curl: (7) Failed to connect to 172.17.0.2 port 80: No route to host
 ```
 
-You can remove the IP from the blackist or even completely unload the program:
+You can remove the IP from the blacklist or even completely unload the program:
 
 ```bash
 $ oxdpus remove --ip=172.17.0.2
