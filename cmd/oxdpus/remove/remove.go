@@ -28,7 +28,6 @@ func NewCommand(logger *logrus.Logger) *cobra.Command {
 			if err != nil {
 				logger.Fatal(err)
 			}
-			defer m.Close()
 			if m.Remove(net.ParseIP(ip)); err != nil {
 				logger.Error(err)
 				return

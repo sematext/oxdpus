@@ -28,7 +28,6 @@ func NewCommand(logger *logrus.Logger) *cobra.Command {
 			if err != nil {
 				logger.Fatal(err)
 			}
-			defer hook.Close()
 			if err := hook.Attach(dev); err != nil {
 				logger.Fatal(err)
 			}

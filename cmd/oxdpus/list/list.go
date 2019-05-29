@@ -27,7 +27,6 @@ func NewCommand(logger *logrus.Logger) *cobra.Command {
 			if err != nil {
 				logger.Fatal(err)
 			}
-			defer m.Close()
 			for _, ip := range m.List() {
 				fmt.Println(fmt.Sprintf("* %s", ip))
 			}
