@@ -5,16 +5,16 @@ o**xdp**us is a toy tool that demonstrates some of the super powers of [XDP](htt
 ## Requirements
 
 To build oxdpus you have to satisify the following requirements:
-- have a modern Linux kernel (4.12>) that supports XDP
+- have a modern Linux kernel (>4.12) that supports XDP
 - linux headers
 - clang
 - LLVM
-- Go 1.12>
+- Go >1.12
 - gobindata (to embed XDP bytecode inside Go binary)
 
-This repository ships with `Makefile` to facilitate the build process. `make xdp` compiles the XDP program and generates the Go source to reference the resulting bytecode. Once the XDP ELF object is produced, you can build the Go binary with `make go`. After compilation is done, the binary will be availalbe in `cmd/oxdpus/oxdpus`.
+This repository ships with a `Makefile` to facilitate the build process. The `make xdp` command compiles the XDP program and generates Go source code to reference the resulting bytecode. Once the XDP ELF object is produced, you can build the Go binary with `make go`. After compilation is done, the binary will be availalbe in `cmd/oxdpus/oxdpus`.
 
-If your mere intention is to just build the Go binary (without requiring modifications in the XDP program), then you'll only need the Go compiler since the XDP bytecode is already baked into the binary. 
+If your mere intention is to just build the Go binary without requiring modifications in the XDP program, then you'll only need the Go compiler since the XDP bytecode is already baked into the binary. 
 
 ## Usage
 
@@ -69,3 +69,5 @@ INFO 172.17.0.2 address removed from the blacklist
 $ oxdpus detach --dev=vethbd33820
 INFO XDP program successfully unloaded from vethbd33820 device
 ```
+
+To read more, check out the tutorial I wrote about [Processing Packets at Bare-metal Speed](). 
