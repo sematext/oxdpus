@@ -13,9 +13,11 @@ package remove
 
 import (
 	"github.com/sematext/oxdpus/pkg/blacklist"
+	"github.com/sematext/oxdpus/pkg/iprange"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"net"
+	"strings"
 )
 
 func NewCommand(logger *logrus.Logger) *cobra.Command {
@@ -27,6 +29,21 @@ func NewCommand(logger *logrus.Logger) *cobra.Command {
 			m, err := blacklist.NewMap()
 			if err != nil {
 				logger.Fatal(err)
+			}
+			// IP range is specified in CIDR notation
+			if strings.Contains(ip, "/") {
+				addrs, err := iprange.FromCIDR(ip)
+				if err != nil {
+					logger.Fatal(err)
+				}
+				for _, addr := range addrs {
+					if m.Remove(net.ParseIP(addr)); err != nil {
+						logger.Warnf("fail to remove %s IP address from the blacklist", addr)
+						continue
+					}
+				}
+				logger.Infof("%d addresses removed from the blacklist", len(addrs))
+				return
 			}
 			if m.Remove(net.ParseIP(ip)); err != nil {
 				logger.Error(err)
