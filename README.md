@@ -70,6 +70,22 @@ $ oxdpus detach --dev=vethbd33820
 INFO XDP program successfully unloaded from vethbd33820 device
 ```
 
+### Bump max file descriptor limit
+
+If you get an error such as `FATA error while loading map "maps/blacklist": too many open files`, you're likely running on low file descriptor limits. Run the following commands to bump the limt:
+
+```
+echo "fs.file-max = 4194304" >> /etc/sysctl.d/local.conf
+echo "fs.nr_open = 4194304" >> /etc/sysctl.d/local.conf
+sysctl -p /etc/sysctl.d/local.conf
+ulimit -n 4194304
+ulimit -l unlimited
+sed -i "s/# End of file//" /etc/security/limits.conf
+printf "\n* - nofile 4194304\nroot - nofile 4194304\n" >> /etc/security/limits.conf
+printf "\n* - memlock unlimited\nroot - memlock unlimited\n" >> /etc/security/limits.conf
+printf "\nulimit -n 4194304\nulimit -l unlimited\n" >> ~/.bashrc
+```
+
 ## Tutorial
 
 To read more, check out the tutorial I wrote about [Processing Packets at Bare-metal Speed](https://sematext.com/blog/ebpf-and-xdp-for-processing-packets-at-bare-metal-speed/). 
