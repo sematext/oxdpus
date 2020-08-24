@@ -30,7 +30,7 @@ struct bpf_map_def SEC("maps/blacklist") blacklist = {
     .type = BPF_MAP_TYPE_HASH,
     .key_size = sizeof(u32),
     .value_size = sizeof(u32),
-    .max_entries = 65536,
+    .max_entries = 4194304,
     .pinning = PIN_GLOBAL_NS,
     .namespace = "globals",
 };

@@ -83,4 +83,4 @@ int xdp_ip_filter(struct xdp_md *ctx) {
     return XDP_PASS;
 }
 
-char __license[] SEC("license") = "GPL";
+char __license[] SEC("license") = "Dual MIT/GPL";
